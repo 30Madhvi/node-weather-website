@@ -3,6 +3,7 @@ const express = require('express')
 const hbs = require('hbs')
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
+var exphbs  = require('express-handlebars');
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -20,7 +21,8 @@ const partialsPath = path.join(__dirname , '../templates/partials')
 
 
 //Setup handlebars engine and views location
-app.set('view engine' , 'hbs')
+app.engine('.hbs', exphbs({extname: '.hbs'}));
+app.set('view engine' , '.hbs')
 app.set('views' , viewPath)
 hbs.registerPartials(partialsPath)
 
